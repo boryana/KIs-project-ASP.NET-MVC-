@@ -1,0 +1,144 @@
+﻿
+@model New.Models.CreateKiViewModel
+
+@{
+    ViewBag.Title = "Нов документ";
+}
+<style>
+
+
+    .flo1 {
+        float: left;
+        
+    }
+     .flo2 {
+        float: left;
+        margin-left:5px;
+        
+    }
+    
+    fieldset.scheduler-border {
+        
+    border: 1px  dotted #808080 !important;
+    width:80%;
+    border-radius:0px 25px;
+    margin:15px;
+
+    }
+
+    legend.scheduler-border{
+        width:auto;
+        padding: 5px !important;
+        border-bottom:none;
+        margin-bottom:0px;
+    }
+    /*.glyphicon{
+        font-size:25px;}*/
+    .pad{
+        padding-top:20px;
+    }
+</style>
+@*<h2>Нов документ</h2>*@
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Нов документ</legend>
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @*<div class="form-group">
+                @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+                <div class="form-group pad">
+                    @Html.LabelFor(model => model.UniRegNum, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UniRegNum, new { htmlAttributes = new { @class = "form-control flo1", id = "un" } })<span  class="control-label flo2">г.</span>
+                        @Html.ValidationMessageFor(model => model.UniRegNum, "", new { @class = "text-danger" })
+                        <span class="glyphicon glyphicon-question-sign flo2 control-label" data-toggle="tooltip" title=" RB303105-001-06/1-1/ 01.01.2000" data-placement="top" @*type="button"*@ value=""  @*onclick="location.href='@Url.Action("", "KIs")'*@ >
+
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OE, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OE, new { htmlAttributes = new { @class = "form-control", id = "oe" } })
+                        @Html.ValidationMessageFor(model => model.OE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <fieldset>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GrifNames.Name, @*"GrifNameId",*@ htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("GrifNameId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GrifNames.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Laws.LawName, @*"LawId"*@ htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="flo">
+                                @Html.DropDownList("LawId", null, htmlAttributes: new { @class = "form-control flo1" })
+                                @Html.ValidationMessageFor(model => model.Laws.LawName, "", new { @class = "text-danger" })
+                                @*<input type="button" value="Добави ново" class="btn btn-default flo2 " onclick="location.href='@Url.Action("CreateLawBtn", "KIs")' " />*@
+                                <button data-toggle="tooltip" title="Добави правно основание в падащото меню" data-placement="right" type="button" value="" class="btn btn-default flo2 " onclick="location.href='@Url.Action("CreateLawBtn", "KIs")' " ><span class="glyphicon glyphicon-plus-sign" ></span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateExpired, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DateExpired, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DateExpired, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Създай" class="btn btn-info" />
+                    </div>
+                </div>
+            </div>
+</fieldset>
+}
+
+<div>
+    @Html.ActionLink("Обратно", "Index")
+</div>
+<script>
+$(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            })
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Content/DefaultValues.js")
+}
+
+
+

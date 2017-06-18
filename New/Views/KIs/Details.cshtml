@@ -1,0 +1,163 @@
+﻿@model New.Models.KI
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+
+   
+
+    .color{color:white;}
+    button.pad 
+    {
+        float:right;
+         margin-right:5%;
+         margin-bottom: 2%;
+         color: white !important;
+         padding:7px;
+         font-size:18px;
+         border-radius:5px;
+    }
+   
+    fieldset.scheduler-border{
+        
+    border: 1px  dotted #808080 !important;
+    width:90%;
+    border-radius:0px 25px;
+    margin:15px;
+
+    }
+    legend.scheduler-border{
+        width:auto;
+        padding: 5px !important;
+        border-bottom:none;
+        margin-bottom:0px;
+    }
+    table.table {
+        width:90%;
+        margin-left:5%;
+        margin-right:5%;
+        margin-top: 3%;
+
+    }
+    i.glyphicon{
+        font-size:18px;
+    }
+    span.glyphicon {
+        font-size:25px;
+    }
+    span.glyphicon.glyphicon-remove-circle{
+        color:red;
+    }
+    a{
+        margin:5px;
+    }
+    
+</style>
+
+
+@*<div class="row">*@
+    @*<h4>KI</h4>*@
+    @*<hr />*@
+
+  <fieldset class="scheduler-border">
+      <legend class="scheduler-border">Документ</legend>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UniRegNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UniRegNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        @*<dd>
+                @Html.DisplayFor(model=>model.Grifs))
+            </dd>*@
+        <dt></dt>
+        <dd>
+            <a href="@Url.Action("Edit", "KIs", new { id = Model.KIId })"><span data-toggle="tooltip" title="Промени данните" data-placement="right"class="glyphicon glyphicon-pencil"></span></a>
+            <a href="@Url.Action("Delete", "KIs", new { id = Model.KIId })"><span data-toggle="tooltip" title="Изтрий Целия Документ" data-placement="right" class="glyphicon glyphicon-remove-circle fix"></span></a>
+        </dd>
+    </dl>
+    <h4 class="text-center">Гриф за сигурност</h4>
+    <table class="table table-bordered table-striped">
+        <tr>
+            @{var l = Model.Grifs;
+                <th>@Html.DisplayNameFor(modelItem => l.FirstOrDefault().GrifNames.Name)</th>
+                <th>@Html.DisplayNameFor(modelItem => l.FirstOrDefault().DateCreated)</th>
+                <th>@Html.DisplayNameFor(modelItem => l.FirstOrDefault().DateExpired)</th>
+                <th>@Html.DisplayNameFor(modelItem => l.FirstOrDefault().Laws.LawName)</th>
+                <th>@Html.DisplayNameFor(modelItem => l.FirstOrDefault().User.UserName)</th>
+                <th></th>
+                }
+            </tr>
+
+            @foreach (var item in Model.Grifs)
+            {
+                if (item == this.Model.Grifs.LastOrDefault())
+                {
+                    <tr class="danger">
+                        <td> <b>@Html.DisplayFor(modelItem => item.GrifNames.Name) </b></td>
+                        <td> <b>@Html.DisplayFor(modelItem => item.DateCreated, "{0:dd.MM.yyyy}")</b> </td>
+                        <td><b> @Html.DisplayFor(modelItem => item.DateExpired)</b> </td>
+                        <td><b> @Html.DisplayFor(modelItem => item.Laws.LawName)</b> </td>
+                        <td> <b>@Html.DisplayFor(modelItem => item.User.UserName) </b></td>
+                        <td style="border:none">
+                            <a href="@Url.Action("Edit", "Grifs", new { id = item.GrifId })"><i data-toggle="tooltip" title="Промени този гриф" data-placement="right" class="glyphicon glyphicon-pencil"></i></a>
+                            <a href="@Url.Action("Delete", "Grifs", new { id = item.GrifId })"><i data-toggle="tooltip" title="Изтрий този гриф" data-placement="right"  class="glyphicon glyphicon-remove-circle"></i></a>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td> @Html.DisplayFor(modelItem => item.GrifNames.Name) </td>
+                        <td> @Html.DisplayFor(modelItem => item.DateCreated, "{0:dd/MM/yyyy}") </td>
+                        <td> @Html.DisplayFor(modelItem => item.DateExpired) </td>
+                        <td> @Html.DisplayFor(modelItem => item.Laws.LawName) </td>
+                        <td> @Html.DisplayFor(modelItem => item.User.UserName) </td>
+                        <td><a href="@Url.Action("Edit", "Grifs", new { id = item.GrifId })"><i data-toggle="tooltip" title="Промени това ниво на класиф." data-placement="right"class="glyphicon glyphicon-pencil"></i></a>
+                            <a href="@Url.Action("Delete", "Grifs", new { id = item.GrifId })"><i data-toggle="tooltip" title="Изтрий това ниво на класиф." data-placement="right" class="glyphicon glyphicon-remove-circle"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+
+    <button class=" pad   btn-info">
+        @Html.ActionLink("Промяна на грифа", "AddGrif", new { id = Model.KIId }, htmlAttributes: new { @class = "color" }) @*, htmlAttributes: new { @class = " btn btn-info" }*@
+    </button>
+</fieldset>
+
+<div class="pad">
+    @*@Html.ActionLink("Промяна", "Edit", new { id = Model.KIId }) <br />
+        @Html.ActionLink("Изтрий", "Delete", new { id = Model.KIId }) <br />*@
+    @Html.ActionLink("Обратно", "Index")
+    </div>
+
+<script>
+$(function(){
+$('[data-toggle="tooltip"]').tooltip();
+})
+</script>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+

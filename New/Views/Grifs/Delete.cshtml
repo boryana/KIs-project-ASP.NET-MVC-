@@ -1,0 +1,90 @@
+﻿@model New.Models.Grif
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<style>
+    fieldset.scheduler-border {
+        border: 1px dotted #808080 !important;
+        width: 80%;
+        border-radius: 0px 25px;
+        margin: 15px;
+    }
+
+    legend.scheduler-border {
+        width: auto;
+        padding: 5px !important;
+        border-bottom: none;
+        margin-bottom: 0px;
+    }
+
+    .pad {
+        
+        float: left;
+        
+        margin-top: 5px;
+        color: white !important;
+        
+        font-size: 18px;
+        border-radius: 5px;
+    }
+</style>
+
+<h2> Сигурен ли сте, че искате да изтриете този гриф?</h2>
+<fieldset class="scheduler-border">
+    <legend class="scheduler-border">Изтриване</legend>
+      
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.GrifNames.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GrifNames.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.KIs.UniRegNum)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.KIs.UniRegNum)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Laws.LawName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Laws.LawName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateCreated)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateExpired)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateExpired)
+            </dd>
+            <dt></dt>
+            <dd>
+                <div class="form-actions no-color">
+                    <input type="submit" value="Изтрий" class="btn btn-info pad" />
+                </div>
+            </dd>
+        </dl>
+</fieldset>
+
+        @Html.ActionLink("Обратно", "Index", "KIs")
+    
+

@@ -1,0 +1,88 @@
+﻿@model New.Models.KI
+
+@{
+    ViewBag.Title = "Промяна на документа";
+}
+<style>
+    fieldset.scheduler-border {
+        border: 1px dotted #808080 !important;
+        width: 80%;
+        border-radius: 0px 25px;
+        margin: 10px;
+    }
+
+    legend.scheduler-border {
+        width: auto;
+        padding: 5px !important;
+        border-bottom: none !important;
+        margin-bottom: 0px;
+    }
+
+    .marg {
+        margin: 15px;
+    }
+
+    .pad{
+        padding-top:17px;
+    }
+
+</style>
+
+<h2></h2>
+<fieldset class="scheduler-border pad">
+    <legend class="scheduler-border ">Промени документа </legend>
+    @*<h2>Промени</h2>*@
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            
+    
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.KIId)
+
+            <div class="form-group pad">
+                @Html.LabelFor(model => model.UniRegNum, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UniRegNum, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UniRegNum, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OE, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.OE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Запази" class="btn btn-info" />
+                </div>
+            </div>
+        </div>
+
+    }
+
+    </fieldset>
+
+    <div>
+        @Html.ActionLink("Обратно", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

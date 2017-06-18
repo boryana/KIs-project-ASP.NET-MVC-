@@ -1,0 +1,230 @@
+﻿@model IEnumerable<New.Models.KI>
+
+@{
+    ViewBag.Title = "КИ";
+}
+<style>
+    .float {
+        float: right;
+    }
+
+    .color {
+        color: white;
+    }
+
+    .table-hover tr#clickRow:hover td {
+        background-color: gainsboro;
+    }
+
+    .pad {
+        margin-bottom: 20px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 20px;
+    }
+
+    .pad1 {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .table-curved {
+        /*border-top-right-radius:25px;
+        border-top-left-radius:25px;*/
+        border-collapse: separate;
+        border-radius: 30px;
+        /*border: 3px ;*/
+        /*position:relative;
+        z-index:1;*/
+        overflow: hidden;
+    }
+
+    .no-bord {
+        border: hidden;
+    }
+
+    table.table {
+        /*margin-left:5%;
+        margin-right:5%;*/
+        /*width:70%;*/
+        margin: auto;
+        /*width:auto;*/
+    }
+
+    div.btn {
+        margin-top: 20px;
+        /*margin-left:100px;*/
+        padding: 5px 10px;
+        color: white;
+        font-size: 18px;
+        /*margin-bottom: 3%;*/
+        /*float: right;*/
+        /*margin-left: 5%;*/
+        /*display: inline-block;*/
+        /*margin-top: 3%;*/
+        /*clear: both;
+        margin-left:auto;
+        margin-right:auto;*/
+    }
+
+    button.btn-default {
+        margin: 25px;
+        font-size: 30px;
+    }
+</style>
+<p>
+    
+
+<div class=" col-md-4">
+    <div class="btn btn-info">
+        <div class="pad1">
+            @Html.ActionLink("СЪЗДАЙ    ", "Create", "KIs", htmlAttributes: new { @class = "color" })<i class="glyphicon glyphicon-plus"></i>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    @using (Html.BeginForm("SearchByGrif", "KIs"))
+    {
+        <div class="pad">
+            @Html.DropDownList("grId", null, "-Ниво на класиф.-", new { onchange = "this.form.submit();", @class = "form-control" })  @*( "grId", "Select", new { @class = "form-control" })*@
+            @*<input type="submit" value="Търси" />*@
+        </div>
+
+    }
+</div>
+
+<div class=" col-md-4">
+    @using (Html.BeginForm("SearchByYearExpired", "KIs", FormMethod.Get))
+    {
+        <div class="pad">
+            <div class="input-group ">
+                <div class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+                <input type="text" name="year" id="year" class="form-control" placeholder="Година на изтичане" />
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("SearchByYearCreated", "KIs", FormMethod.Get))
+    {
+        <div class="pad">
+            <div class="input-group ">
+                <div class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+
+                </div>
+                <input type="text" name="year" id="year" class="form-control" placeholder="Година на създаване" />
+            </div>
+
+        </div>
+     }
+</div>
+
+@{ int rowNum = 0; }
+<div class="table-responsive container body-content ">
+    <table class="table table-hover table-curved table-bordered">
+        <tr>
+
+            <th>
+                #
+                @*@Html.DisplayNameFor(model => model.Number)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UniRegNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grifs)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr id="clickRow" data-url="@Url.Action( "Details", "KIs", new { id = item.KIId } )">
+                <td>
+                    @(rowNum += 1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UniRegNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @foreach (var grif in item.Grifs)
+                {
+                        <table class="table table-condensed no-bord">
+
+                            @if (grif == item.Grifs.LastOrDefault())
+                            {
+                                if ((grif.DateExpired < DateTime.Now) && (grif.GrifNames.Name != "НКИ"))
+                                {
+                                    <tr class="btn-danger">
+                                        <td>
+                                            @Html.DisplayFor(m => grif.GrifNames.Name)
+                                        </td>
+                                        <td align="right">
+                                            @Html.DisplayFor(m => grif.DateExpired, "{0:dd.MM.yyy}")
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr class="btn-info">
+                                        <td>
+                                            @Html.DisplayFor(m => grif.GrifNames.Name)
+                                        </td>
+                                        <td align="right">
+                                            @Html.DisplayFor(m => grif.DateExpired)
+                                        </td>
+                                    </tr>}
+                            }
+                            else
+                            {
+                                <tr>
+
+
+                                    <td>
+                                        @Html.DisplayFor(m => grif.GrifNames.Name)
+                                    </td>
+                                    <td align="right">
+                                        @Html.DisplayFor(m => grif.DateExpired)
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+            </tr>
+        }
+    </table>
+</div>
+<button type="button" class="btn btn-default float" value="" onclick="window.print()"><span class="glyphicon glyphicon-print"></span></button>
+
+@section Scripts
+
+{
+
+    <script type="text/javascript">
+
+                $(document).ready(function () {
+                    $('tr#clickRow').click(function () {
+                        var url = $(this).data("url");
+                        window.location.href = url;
+                    });
+                });
+
+    </script>
+
+}

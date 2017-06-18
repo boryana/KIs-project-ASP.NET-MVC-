@@ -1,0 +1,58 @@
+﻿@model New.Models.Grif
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Grif</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GrifNames.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GrifNames.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KIs.UniRegNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KIs.UniRegNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laws.LawName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laws.LawName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateExpired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateExpired)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GrifId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

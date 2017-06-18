@@ -1,0 +1,97 @@
+﻿@model New.Models.KI
+
+@{
+    ViewBag.Title = "Изтриване";
+}
+<style>
+    fieldset.scheduler-border{
+        
+    border: 1px  dotted #808080 !important;
+    width:80%;
+    border-radius:0px 25px;
+    margin:15px;
+
+    }
+    legend.scheduler-border{
+        width:auto;
+        padding: 5px !important;
+        border-bottom:none;
+        margin-bottom:0px;
+    }
+
+     input.btn.btn-info.pad 
+    {
+        /*padding: 2em;*/
+        
+        /*float:left;*/
+        margin-left:10%;
+         /*margin-right:2%;*/
+         margin-bottom: 2%;
+         margin-top:2%;
+         color: white !important;
+         padding:5px;
+         font-size:18px;
+         border-radius:5px;
+    }
+
+</style>
+<h2>Сигурен ли сте, че искате да изтриете този документ?</h2>
+<fieldset class="scheduler-border">
+    <legend class="scheduler-border">Изтриване</legend>
+
+
+    <dl class="dl-horizontal">
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Number)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Number)
+            </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UniRegNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UniRegNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        <dt></dt>
+        <dd>
+  
+    </dl>
+    
+        @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Изтрий" class="btn btn-info pad" /> |
+                @Html.ActionLink("Обратно", "Details", new { id = Model.KIId })
+            </div>
+        }
+        @*@using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()*@
+
+
+        @*}*@
+        
+</fieldset>
+
+@Html.ActionLink("Към списъка", "Index")

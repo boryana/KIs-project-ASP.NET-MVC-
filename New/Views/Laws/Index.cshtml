@@ -1,0 +1,81 @@
+﻿@model IEnumerable<New.Models.Law>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+
+    .color{color:white;}
+
+    table.table{
+        width:60%;
+        /*margin:10px;*/
+         border-collapse:separate;
+        border-radius:25px;
+        overflow:hidden;
+        
+    }
+
+    div.btn{
+        padding: 5px 10px;
+        color:white;
+        font-size:18px;
+        margin-bottom:3%;
+        float:right;
+        margin-right:41%;
+        display:inline-block;
+        margin-top:3%;
+        clear:both;
+        
+    }
+    div.inline{
+        /*clear:left;*/
+        display:inline-block;
+        font-size:20px;
+        font-style:italic;
+        margin-top:3% ;
+        margin-bottom:3%;
+        margin-left:5px;
+        
+    }
+     i.glyphicon{/*font-family:"Gliphicons Halfings" !important;*/
+        font-size:20px;
+    }
+    /*.glyphicon{
+        font-size:30px;
+    }*/
+    a{
+        margin:5px;
+    }
+</style>
+
+<div class="inline">Правни основания</div>
+
+<div class="btn  btn-info">
+    @Html.ActionLink("Създай ново", "Create", "Laws" , htmlAttributes: new { @class = "color" })
+</div>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LawName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LawName)
+        </td>
+        <td>
+            <a href=" @Url.Action("Edit","Laws", new { id=item.LawId })"/><i class=" glyphicon glyphicon-pencil"></i>
+            <a href=" @Url.Action("Delete","Laws", new { id=item.LawId })" /><i class=" glyphicon glyphicon-remove-circle"></i>
+            @*@Html.ActionLink(" ", "Edit", new { id=item.LawId })@*<i class=" glyphicon glyphicon-edit"></i*@
+            @*@Html.ActionLink("Details", "Details", new { id=item.LawId }) |
+            @Html.ActionLink("Изтрий", "Delete", new { id=item.LawId })*@
+        </td>
+    </tr>
+}
+
+</table>

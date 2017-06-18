@@ -1,0 +1,90 @@
+﻿@model New.Models.Grif
+
+@{
+    ViewBag.Title = "Добави гриф";
+}
+
+<style>
+    
+    fieldset.scheduler-border{
+        
+    border: 1px  dotted #808080 !important;
+    width:80%;
+    border-radius:0px 25px;
+    margin:10px;
+    
+
+    }
+    legend.scheduler-border{
+        width:auto;
+        padding: 5px !important;
+        border-bottom:none !important;
+        margin-bottom:0px;
+    }
+
+    .marg{
+        margin:15px;
+    }
+</style>
+
+@*<h2>Промени грифа</h2>*@
+<fieldset class="scheduler-border">
+    <legend class="scheduler-border">Промени грифа</legend>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4></h4>
+     
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.GrifNameId, "Ниво на класификация", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("GrifNameId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.GrifNameId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LawId, "Правно основание", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("LawId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LawId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateExpired, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateExpired, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DateExpired, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Създай" class="btn btn-info" />
+                </div>
+            </div>
+        </div>
+    }
+
+    
+</fieldset>
+
+<div class="marg">
+    @Html.ActionLink("Обратно", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,68 @@
+﻿@model IList<New.Models.GrifName>
+
+@{     ViewBag.Title = "Справка"; }
+
+
+<style>
+    fieldset.scheduler-border{
+        
+    border: 1px  dotted #808080 !important;
+    width:50%;
+    border-radius:0px 25px;
+    margin:15px;
+
+    }
+    legend.scheduler-border{
+        width:auto;
+        padding: 5px !important;
+        border-bottom:none;
+        margin-bottom:0px;
+    }
+    table.table {
+        /*width: 90%;*/
+        margin-left: 15%;
+        margin-right: 15%;
+        overflow:hidden;
+       text-align:right;
+       
+
+    }
+
+</style>
+
+<fieldset class="scheduler-border">
+    <legend class="scheduler-border">Брой документи с ниво на класификация:</legend>
+
+    @*<p class="text-info"> Общ брой документи: @ViewBag.all </p>*@
+
+    <table class="table  ">
+        <tbody class="col-md-5 ">
+
+
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr class="">
+                    <td class="">
+                        @Html.DisplayFor(m => m[i].Name)
+                    </td>
+                    <td class="">
+                        @ViewBag.m[i]
+                    </td>
+                </tr>
+
+            }
+            <tr class="">
+                <td>
+
+                    Общ брой документи
+                </td>
+                <td>
+                    @ViewBag.all
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>
+
+
+   

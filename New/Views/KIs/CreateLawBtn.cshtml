@@ -1,0 +1,57 @@
+﻿@model New.Models.Law
+
+@{
+    ViewBag.Title = "CreateLawBtn";
+}
+<style>
+    fieldset.scheduler-border{
+        
+    border: 1px  dotted #808080 !important;
+    width:60%;
+    border-radius:0px 25px;
+    margin:15px;
+
+    }
+    legend.scheduler-border{
+        width:auto;
+        padding: 5px !important;
+        border-bottom:none;
+        margin-bottom:0px;
+    }
+    textarea{
+        width:300px;
+        height:80px;
+    }
+</style>
+@*<h2>Добави</h2>*@
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border"> Добави ново правно основание</legend>
+        <div class="form-horizontal">
+            @*<h4>Law</h4>*@
+            @*<hr />*@
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.LawName, htmlAttributes: new { @class = "control-label col-md-2 " })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.LawName, new { htmlAttributes = new { @class = "form-control " } })
+                    @Html.ValidationMessageFor(model => model.LawName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Създай" class="btn btn-info" />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+}
+
+<div>
+    @Html.ActionLink("Обратно", "Index")
+</div>
